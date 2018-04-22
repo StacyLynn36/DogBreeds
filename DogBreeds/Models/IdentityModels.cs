@@ -35,5 +35,7 @@ namespace DogBreeds.Models
         }
 
         public DbSet<Dog> dogs { get; set; }
+
+        public System.Data.Entity.DbSet<DogBreeds.Models.DogReview> DogReviews { get; set; }
     }
 }

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<DogBreeds.Models.Dog>
+﻿@model IEnumerable<DogBreeds.Models.DogsReviewViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dog Review Administration";
 }
 
-<h2>Index</h2>
+<h2>Dog Review Administration</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,13 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PetName)
+            @Html.DisplayNameFor(model => model.DogName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.DateCreated)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BreedName)
+            @Html.DisplayNameFor(model => model.Content)
         </th>
         <th></th>
     </tr>
@@ -26,13 +26,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.PetName)
+            @Html.DisplayFor(modelItem => item.DogName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @Html.DisplayFor(modelItem => item.DateCreated)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BreedName)
+            @Html.DisplayFor(modelItem => item.Content)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

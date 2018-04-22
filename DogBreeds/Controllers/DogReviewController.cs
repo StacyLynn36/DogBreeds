@@ -6,41 +6,46 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using DogBreeds.Models;
 
-namespace DogBreeds.Models
+namespace DogBreeds.Controllers
 {
-    public class DogReviews : Controller
+    public class DogReviewController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: DogReviews
+        // GET: DogReview
         public ActionResult Index()
         {
-            return View(BuildDogsReviewViewModelList(db.dogs.ToList()));
+            return View(BuildDogsReviewViewModelList(db.DogReviews.ToList()));
         }
 
-        // GET: DogReviews/Details/5
+        // GET: DogReview/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dog dog = db.dogs.Find(id);
-            if (dog == null)
+            DogReview dogReview = db.DogReviews.Find(id);
+            DogsReviewViewModel dogsReviewViewModel = BuildDogsReviewViewModel(dogReview);
+            if (dogReview == null)
             {
                 return HttpNotFound();
             }
-            return View(dog);
+            return View(dogsReviewViewModel);
         }
 
-        // GET: DogReviews/Create
+        // GET: DogReview/Create
         public ActionResult Create()
         {
+            //generate select list with ids for dogs dropdown
+            var dogList = db.dogs.Select(d => d);
+            ViewBag.SelectDogList = new SelectList(dogList, "Id", "Name");
             return View();
         }
 
-        // POST: DogReviews/Create
+        // POST: DogReview/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -57,22 +62,23 @@ namespace DogBreeds.Models
             return View(dog);
         }
 
-        // GET: DogReviews/Edit/5
+        // GET: DogReview/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dog dog = db.dogs.Find(id);
-            if (dog == null)
+            DogReview dogReview = db.DogReviews.Find(id);
+            DogsReviewViewModel dogsReviewViewModel = BuildDogsReviewViewModel(dogReview);
+            if (dogReview == null)
             {
                 return HttpNotFound();
             }
-            return View(dog);
+            return View(dogReview);
         }
 
-        // POST: DogReviews/Edit/5
+        // POST: DogReview/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -88,22 +94,23 @@ namespace DogBreeds.Models
             return View(dog);
         }
 
-        // GET: DogReviews/Delete/5
+        // GET: DogReview/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dog dog = db.dogs.Find(id);
-            if (dog == null)
+            DogReview dogReview = db.DogReviews.Find(id);
+            DogsReviewViewModel dogsReviewViewModel = BuildDogsReviewViewModel(dogReview);
+            if (dogReview == null)
             {
                 return HttpNotFound();
             }
-            return View(dog);
+            return View(dogsReviewViewModel);
         }
 
-        // POST: DogReviews/Delete/5
+        // POST: DogReview/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -123,6 +130,47 @@ namespace DogBreeds.Models
             base.Dispose(disposing);
         }
 
-       
+        [NonAction]
+        private DogsReviewViewModel DogsReviewViewModel(DogReview dogReview)
+        {
+            
+            //generate a dictionary with brewery ids and names for lookup
+            var dogNames = db.dogs.ToDictionary(d => d.Id, d => d.PetName);
+
+            return new DogsReviewViewModel()
+            {
+                Id = dogReview.Id,
+                DateCreated = dogReview.DateCreated,
+                Content = dogReview.Content,
+                DogId = dogReview.DogId,
+                DogName = dogNames[dogReview.DogId]
+            };
+        }
+
+        [NonAction]
+        private List<DogsReviewViewModel> BuildDogsReviewViewModelList(List<DogReview> dogReviews)
+        {
+            List<DogsReviewViewModel> dogsReviewViewModel = new List<DogsReviewViewModel>();
+            //generate a dictionary with dog ids and names for lookup
+            var dogNames = db.dogs.ToDictionary(d => d.Id, d => d.PetName);
+
+            foreach (var dogReview in dogReviews)
+            {
+                dogsReviewViewModel.Add(new DogsReviewViewModel
+                {
+                    Id = dogReview.Id,
+                    DateCreated = dogReview.DateCreated,
+                    Content = dogReview.Content,
+                    DogId = dogReview.DogId,
+                    DogName = dogNames[dogReview.DogId]
+                });
+                
+            }
+            return dogsReviewViewModel;
+        }
+
+
+
+
     }
 }

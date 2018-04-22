@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -82,5 +83,22 @@ namespace DogBreeds.Models
     {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+    }
+
+    public class DogsReviewViewModel
+    {
+        public int Id { get; set; }
+
+        [Display(Name = "Date Created")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        public DateTime DateCreated { get; set; }
+
+        [Required]
+        public string Content { get; set; }
+
+        public int DogId { get; set; }
+
+        [Display(Name = "Dog")]
+        public string DogName { get; set; }
     }
 }
