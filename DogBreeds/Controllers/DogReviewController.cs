@@ -17,7 +17,7 @@ namespace DogBreeds.Controllers
         // GET: DogReview
         public ActionResult Index()
         {
-            return View(BuildDogsReviewViewModelList(db.DogReviews.ToList()));
+            return View(BiuldDogsReviewViewModelList(db.DogReviews.ToList()));
         }
 
         // GET: DogReview/Details/5
@@ -28,7 +28,7 @@ namespace DogBreeds.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DogReview dogReview = db.DogReviews.Find(id);
-            DogsReviewViewModel dogsReviewViewModel = BuildDogsReviewViewModel(dogReview);
+            DogsReviewViewModel dogsReviewViewModel = DogsReviewViewModel(dogReview);
             if (dogReview == null)
             {
                 return HttpNotFound();
@@ -70,7 +70,7 @@ namespace DogBreeds.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DogReview dogReview = db.DogReviews.Find(id);
-            DogsReviewViewModel dogsReviewViewModel = BuildDogsReviewViewModel(dogReview);
+            DogsReviewViewModel dogsReviewViewModel = DogsReviewViewModel(dogReview);
             if (dogReview == null)
             {
                 return HttpNotFound();
@@ -102,7 +102,7 @@ namespace DogBreeds.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DogReview dogReview = db.DogReviews.Find(id);
-            DogsReviewViewModel dogsReviewViewModel = BuildDogsReviewViewModel(dogReview);
+            DogsReviewViewModel dogsReviewViewModel = DogsReviewViewModel(dogReview);
             if (dogReview == null)
             {
                 return HttpNotFound();
@@ -148,7 +148,7 @@ namespace DogBreeds.Controllers
         }
 
         [NonAction]
-        private List<DogsReviewViewModel> BuildDogsReviewViewModelList(List<DogReview> dogReviews)
+        private List<DogsReviewViewModel> BuildDogsReviewViewModel(List<DogReview> dogReviews)
         {
             List<DogsReviewViewModel> dogsReviewViewModel = new List<DogsReviewViewModel>();
             //generate a dictionary with dog ids and names for lookup
@@ -169,8 +169,29 @@ namespace DogBreeds.Controllers
             return dogsReviewViewModel;
         }
 
+        //list of reviews for a given brewery 
+        public ActionResult ListOfReviewsByDogs(int id)
+        {
+            var dogReviews = db.DogReviews
+                .Where(r => r.DogId == id)
+                .ToList();
 
+            int Id = 0;
+            //get dog to pass
+            var dogs = db.dogs.FirstOrDefault(d => d.Id == Id);
+            ViewBag.dogs = dogs;
 
+            if (dogs != null)
+            {
+                return View(dogReviews);
+            }
+            else
+            {
+                //redirect to error page with error message
+                ViewBag.ErrorMessage = "Dog Not Found.";
+                return View("Error");
+            }
+        }
 
     }
 }

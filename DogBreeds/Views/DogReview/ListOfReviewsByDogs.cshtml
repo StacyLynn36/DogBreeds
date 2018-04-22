@@ -1,0 +1,24 @@
+﻿@model IEnumerable<DogBreeds.Models.DogReview>
+
+@{
+    ViewBag.Title = "Dog Reviews";
+    //cast the dynamic objrct to access the Dog properties
+    var dog = (DogBreeds.Models.Dog)ViewBag.Dog;
+}
+
+<h2>Dog Reviews for @dog.PetName</h2>
+
+<table class="table">
+    @foreach (var review in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => review.DateCreated)<br />
+                @Html.DisplayFor(modelItem => review.Content)<br />
+                @Html.ActionLink("Return to Dog List", "ListDogs", "Dogs")
+            </td>
+        </tr>
+    }
+</table>
+
+
