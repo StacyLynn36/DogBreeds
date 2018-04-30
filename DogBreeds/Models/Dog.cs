@@ -10,8 +10,8 @@ namespace DogBreeds.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        [MinLength(5, ErrorMessage = "Dog breed names must be at least 5 characters.")]
+        //[Required]
+        //[MinLength(5, ErrorMessage = "Dog breed names must be at least 5 characters.")]
         public string PetName { get; set; }
 
         [Required]

@@ -18,15 +18,15 @@ namespace DogBreeds.Migrations
                  new Models.Dog()
                  {
                      PetName = "Chihuahua",
-                     Type = Models.GroupType.Toy,                    
-                    
+                     Type = Models.GroupType.Toy,
+                     BreedName = "dog"
                  },
 
                   new Models.Dog()
                   {
                       PetName = "Irish Wolfhound",
                       Type = Models.GroupType.Hounds,
-                      
+                      BreedName = "dog"
                   }
 
                );

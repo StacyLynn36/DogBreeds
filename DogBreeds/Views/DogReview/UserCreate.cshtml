@@ -47,5 +47,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "ListOfReviewsByDog","DogReviews", new { id = @Request.QueryString["dogId"] }, null)
 </div>

@@ -15,10 +15,13 @@
             <td>
                 @Html.DisplayFor(modelItem => review.DateCreated)<br />
                 @Html.DisplayFor(modelItem => review.Content)<br />
-                @Html.ActionLink("Return to Dog List", "ListDogs", "Dogs")
             </td>
         </tr>
     }
 </table>
+
+@Html.ActionLink("Add a Reivew", "UserCreate", "DogReviews", new { dogId = dog.Id}, null)<br/>
+@Html.ActionLink("Return to Dog List", "ListDogs", "Dogs")
+
 
 

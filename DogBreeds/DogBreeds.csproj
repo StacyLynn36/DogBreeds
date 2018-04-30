@@ -193,6 +193,7 @@
     <Compile Include="Controllers\DogReviewController.cs" />
     <Compile Include="Controllers\DogsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdentityRoleController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -208,6 +209,10 @@
     <Compile Include="Migrations\201803290339121_userModel1.cs" />
     <Compile Include="Migrations\201803290339121_userModel1.Designer.cs">
       <DependentUpon>201803290339121_userModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804261850535_velis1.cs" />
+    <Compile Include="Migrations\201804261850535_velis1.Designer.cs">
+      <DependentUpon>201804261850535_velis1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -281,7 +286,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Dogs\Create.cshtml" />
     <Content Include="Views\Dogs\Delete.cshtml" />
     <Content Include="Views\Dogs\Details.cshtml" />
     <Content Include="Views\Dogs\Edit.cshtml" />
@@ -294,6 +298,18 @@
     <Content Include="Views\DogReview\Index.cshtml" />
     <Content Include="Views\DogReview\ListOfReviewsByDogs.cshtml" />
     <Content Include="Views\DogReview\UserCreate.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Dogs\Create.cshtml" />
+    <Content Include="Views\IdentityRole\Index.cshtml" />
+    <Content Include="Views\IdentityRole\Details.cshtml" />
+    <Content Include="Views\IdentityRole\Create.cshtml" />
+    <Content Include="Views\IdentityRole\Edit.cshtml" />
+    <Content Include="Views\IdentityRole\Delete.cshtml" />
+    <Content Include="Views\Account\ViewUsersRoles.cshtml" />
+    <Content Include="Views\Account\AddRoleToUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -320,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803290339121_userModel1.resx">
       <DependentUpon>201803290339121_userModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804261850535_velis1.resx">
+      <DependentUpon>201804261850535_velis1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

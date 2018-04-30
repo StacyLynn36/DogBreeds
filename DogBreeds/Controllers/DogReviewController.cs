@@ -17,7 +17,7 @@ namespace DogBreeds.Controllers
         // GET: DogReview
         public ActionResult Index()
         {
-            return View(BiuldDogsReviewViewModelList(db.DogReviews.ToList()));
+            return View(BuildDogsReviewViewModel(db.DogReviews.ToList()));
         }
 
         // GET: DogReview/Details/5
@@ -60,6 +60,26 @@ namespace DogBreeds.Controllers
             }
 
             return View(dog);
+        }
+         //GET: user create dog review
+         public ActionResult UserCreate()
+        {
+            return View();
+        }
+
+        //POST: user create dog review
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserCreate([Bind(Include ="Id,DateCreated,Content,DogID")] DogReview dogReview)
+        {
+            if (ModelState.IsValid)
+            {
+                db.DogReviews.Add(dogReview);
+                db.SaveChanges();
+                return RedirectToAction("ListOfReviewsByDog", new { id = dogReview.DogId });
+            }
+
+            return View(dogReview);
         }
 
         // GET: DogReview/Edit/5
