@@ -46,7 +46,7 @@ namespace DogBreeds.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Type,BreedName")] Dog dog)
+        public ActionResult Create([Bind(Include = "Id,PetName,Type,BreedName")] Dog dog)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace DogBreeds.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Type,BreedName")] Dog dog)
+        public ActionResult Edit([Bind(Include = "Id,PetName,Type,BreedName")] Dog dog)
         {
             if (ModelState.IsValid)
             {

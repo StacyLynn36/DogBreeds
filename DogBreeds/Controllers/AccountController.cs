@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-
+using System.Web.Security;
 
 namespace DogBreeds.Controllers
 {
@@ -32,6 +32,162 @@ namespace DogBreeds.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
         }
+
+        //[AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
+        //public ActionResult Index()
+        //{
+        //    var db = new ApplicationDbContext();
+        //    var users = db.Users;
+        //    var model = new List<EditUserViewModel>();
+
+        //    foreach (var user in users)
+        //    {
+        //        var u = new EditUserViewModel(user);
+        //        model.Add(u);
+        //    }
+
+        //    return View(model);
+        //}
+
+        //[AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
+        //public ActionResult Details(string userName = null)
+        //{
+        //    var db = new ApplicationDbContext();
+        //    var user = db.Users.First(u => u.UserName == userName);
+        //    var model = new EditUserViewModel(user);
+
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    return View(model);
+        //}
+
+        //// GET: Users/Create
+        //[AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        //// POST: Users/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
+        //public async Task<ActionResult> Create([Bind(Include = "UserName, LastName, FirstName, Email, Password, ConfirmPassword, LegalAge")] CreateUserViewModel userModel)
+        //{
+        //    var db = new ApplicationDbContext();
+
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        var newUser = new ApplicationUser()
+        //        {
+        //            UserName = userModel.Email,
+        //            FirstName = userModel.FirstName,
+        //            LastName = userModel.LastName,
+        //            Email = userModel.Email,
+        //            LegalAge = userModel.LegalAge
+        //        };
+
+        //        var result = await UserManager.CreateAsync(newUser);
+        //        if (result.Succeeded)
+        //        {
+        //            PasswordHasher ph = new PasswordHasher();
+        //            newUser.PasswordHash = ph.HashPassword(userModel.Password);
+        //            UserManager.AddToRole(newUser.Id, "Guest");
+        //            return RedirectToAction("Index", "Account");
+        //        }
+
+        //        AddErrors(result);
+        //    }
+
+        //    return View(userModel);
+        //}
+
+        //[AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
+        //public ActionResult Edit(string userName = null)
+        //{
+        //    if (userName == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+
+        //    var db = new ApplicationDbContext();
+        //    var user = db.Users.First(u => u.UserName == userName);
+        //    var model = new EditUserViewModel(user);
+
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    return View(model);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
+        //public ActionResult Edit([Bind(Include = "UserName, LastName, FirstName, Email, Password, ConfirmPassword, LegalAge")] EditUserViewModel userModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var db = new ApplicationDbContext();
+        //        var user = db.Users.First(u => u.UserName == userModel.UserName);
+
+        //        if (user != null)
+        //        {
+        //            user.UserName = userModel.Email;
+        //            user.FirstName = userModel.FirstName;
+        //            user.LastName = userModel.LastName;
+        //            user.Email = userModel.Email;
+        //            user.LegalAge = userModel.LegalAge;
+        //            if (userModel.Password != null)
+        //            {
+        //                PasswordHasher ph = new PasswordHasher();
+        //                user.PasswordHash = ph.HashPassword(userModel.Password);
+        //            }
+        //        }
+
+
+        //        db.Entry(user).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(userModel);
+        //}
+
+        //[AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
+        //public ActionResult Delete(string userName = null)
+        //{
+        //    var db = new ApplicationDbContext();
+        //    var user = db.Users.First(u => u.UserName == userName);
+        //    var model = new EditUserViewModel(user);
+
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    return View(model);
+        //}
+
+        //[ValidateAntiForgeryToken]
+        //[HttpPost, ActionName("Delete")]
+        //[AuthorizeOrRedirectAttribute(Roles = "Site Admin")]
+        //public ActionResult DeleteConfirmed(string userName)
+        //{
+        //    var db = new ApplicationDbContext();
+        //    var user = db.Users.First(u => u.UserName == userName);
+        //    db.Users.Remove(user);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
 
         public ApplicationSignInManager SignInManager
         {

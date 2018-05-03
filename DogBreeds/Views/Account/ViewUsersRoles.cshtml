@@ -1,12 +1,9 @@
-﻿
-@{
-    ViewBag.Title = "Roles By User";
+﻿@{
+    ViewBag.Title = "Roles by User";
     string userName = ViewBag.UserName;
 }
-
-<h2>Roles By User</h2>
+<h2>Roles by User</h2>
 <h3>User: @ViewBag.UserName</h3>
-
 <p>
     @Html.ActionLink("Add a Role", "AddRoleToUser", new { userName = userName })
 </p>
@@ -29,11 +26,4 @@
         </tr>
     }
 </table>
-
-<td>
-    @Html.ActionLink("Edit", "Edit", new { userName = item.UserName })
-    @Html.ActionLink("Details", "Details", new { userName = item.UserName })
-    @Html.ActionLink("Delete", "Delete", new { userName = item.UserName })
-    @Html.ActionLink("Roles", "ViewUserRoles", new { userName = item.UserName })
-</td>
 

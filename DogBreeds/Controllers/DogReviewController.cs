@@ -41,7 +41,7 @@ namespace DogBreeds.Controllers
         {
             //generate select list with ids for dogs dropdown
             var dogList = db.dogs.Select(d => d);
-            ViewBag.SelectDogList = new SelectList(dogList, "Id", "Name");
+            ViewBag.SelectDogList = new SelectList(dogList, "Id", "PetName");
             return View();
         }
 
@@ -189,7 +189,7 @@ namespace DogBreeds.Controllers
             return dogsReviewViewModel;
         }
 
-        //list of reviews for a given brewery 
+        //list of reviews for a given dog
         public ActionResult ListOfReviewsByDogs(int id)
         {
             var dogReviews = db.DogReviews
